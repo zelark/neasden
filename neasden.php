@@ -744,7 +744,7 @@ class Neasden {
       }
 
       // code tag: manually manage states
-      if (($state == 'text' or $state == 'code') and mb_substr ($r, -6, 6) == '<code>') {
+      if (($state == 'text' or $state == 'code') and preg_match("/<code(=([a-z]+))?>/", $r, $matches)) {
         ++ $code_nesting;
         if ($code_nesting == 1) {
           $state = 'code';
@@ -754,7 +754,8 @@ class Neasden {
           $thisfrag = array (
             'content' => '', // don’t put the very <code> tag here
             'strength' => self::FRAG_STRENGTH_SACRED,
-            'code' => 1
+            'code' => 1,
+            'lang' => $matches[2],
           );
           $r = '';
         }
@@ -958,7 +959,7 @@ class Neasden {
       if (array_key_exists ('code', $initial_fragment) and $initial_fragment['code']) {
         if ($this->config['html.code.on']) {
           $resulting_fragment['result'] = (
-            $this->config['html.code.wrap'][0] .
+            $this->config['html.code.wrap'][0] . $initial_fragment['lang'] . $this->config['html.code.wrap'][1] .
             htmlspecialchars ($resulting_fragment['result']) .
             $this->config['html.code.wrap'][1]
           );

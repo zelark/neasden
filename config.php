@@ -41,7 +41,7 @@ return array (
   'html.elements.sacred' => 'object embed iframe head link script style code',
 
   'html.code.on' => true,
-  'html.code.wrap' => array ('<pre class="e2-text-code"><code>', '</code></pre>'),
+  'html.code.wrap' => array ('<pre class="e2-text-code"><code class="', '">', '</code></pre>'),
   'html.code.highlightjs' => true,
 
   'groups.on' => true,
