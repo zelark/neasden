@@ -744,7 +744,7 @@ class Neasden {
       }
 
       // code tag: manually manage states
-      if (($state == 'text' or $state == 'code') and preg_match("/<code(=([a-z]+))?>/", $r, $matches)) {
+      if (($state == 'text' or $state == 'code') and preg_match("/<code(=(-[a-z]+))?>/", $r, $matches)) {
         ++ $code_nesting;
         if ($code_nesting == 1) {
           $state = 'code';
